@@ -75,4 +75,27 @@ public class TechnicienController {
     // return new ResponseEntity<StatUser>(stat, HttpStatus.OK);
     // }
 
+    // liste de tous les ticket de l'utilisateur
+    /*
+     * cette classe retourne la liste de tous les tickets concernant
+     * prises en charge par un technicien
+     * 
+     */
+    @GetMapping(path = "ticket-technicien/{id}")
+    ResponseEntity getTicketForTechnicien(@PathVariable String id) {
+        List<Ticket> ticket = new ArrayList<>();
+        for (var ti : ticketR.findAll()) {
+            if (ti.getTechnicien_id() != null) {
+                if (ti.getTechnicien_id().equals(id)) {
+                    ticket.add(0, ti);
+                }
+            } else {
+                if (ti.getStatus().equals("Nouveau")) {
+                    ticket.add(0, ti);
+                }
+            }
+        }
+        return new ResponseEntity<List<Ticket>>(ticket, HttpStatus.OK);
+    }
+
 }

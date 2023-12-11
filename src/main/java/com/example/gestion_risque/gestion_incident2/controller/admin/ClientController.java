@@ -124,6 +124,11 @@ public class ClientController {
         return new ResponseEntity<Integer>(-1, HttpStatus.OK);
     }
 
+    @GetMapping(path = "/users")
+    ResponseEntity<List<User>> getAllUser() {
+        return new ResponseEntity<List<User>>(userR.findAll(), HttpStatus.OK);
+    }
+
     /*
      * Retourne quelques informations sur un utilisateur ou un technicien
      */
@@ -195,5 +200,28 @@ public class ClientController {
     @GetMapping(path = "single_ticket/{id}")
     ResponseEntity<Optional<Ticket>> getTicketById(@PathVariable String id) {
         return new ResponseEntity<Optional<Ticket>>(ticketR.findById(id), HttpStatus.OK);
+    }
+
+    @GetMapping(path = "dernier-ticket/{id}")
+    List<Ticket> dernierTicket(@PathVariable String id) {
+        List<Ticket> output = new ArrayList<Ticket>();
+        List<Ticket> t = ticketR.findAll();
+        for (var i = t.size() - 1; i >= 0 && output.size() < 3; i--) {
+            if (t.get(i).getUser_id().equals(id)) {
+                output.add(t.get(i));
+            }
+        }
+        return output;
+
+    }
+
+    @PostMapping(path = "update_user")
+    ResponseEntity<User> updateUser(@RequestBody User u) {
+        User user = userR.findById(u.getId()).get();
+        user.setName(u.getName());
+        user.setNumber(u.getNumber());
+        user.setAdresse(u.getAdresse());
+
+        return new ResponseEntity<User>(userR.save(user), HttpStatus.OK);
     }
 }
