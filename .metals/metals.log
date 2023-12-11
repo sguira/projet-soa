@@ -1,0 +1,42 @@
+2023.12.09 12:20:14 INFO  Started: Metals version 1.1.0 in folders 'C:\Users\sguir\Desktop\PROJET SOFIANE\gestion_incident2' for client Visual Studio Code 1.85.0.
+2023.12.09 12:20:15 WARN  Build server is not auto-connectable.
+2023.12.09 12:20:15 WARN  no build target for: C:\Users\sguir\Desktop\PROJET SOFIANE\gestion_incident2\src\main\java\com\example\gestion_risque\gestion_incident2\controller\admin\AdminController.java
+2023.12.09 12:20:15 WARN  no build target for: C:\Users\sguir\Desktop\PROJET SOFIANE\gestion_incident2\src\test\java\com\example\gestion_risque\gestion_incident2\GestionIncident2ApplicationTests.java
+2023.12.09 12:20:15 WARN  no build target for: C:\Users\sguir\Desktop\PROJET SOFIANE\gestion_incident2\src\main\java\com\example\gestion_risque\gestion_incident2\security\Security.java
+2023.12.09 12:20:15 WARN  no build target for: C:\Users\sguir\Desktop\PROJET SOFIANE\gestion_incident2\src\main\java\com\example\gestion_risque\gestion_incident2\GestionIncident2Application.java
+2023.12.09 12:20:15 WARN  no build target for: C:\Users\sguir\Desktop\PROJET SOFIANE\gestion_incident2\src\main\java\com\example\gestion_risque\gestion_incident2\Controller.java
+2023.12.09 12:20:16 WARN  Running javac-semanticdb failed for file:///C:/Users/sguir/Desktop/PROJET%20SOFIANE/gestion_incident2/src/main/java/com/example/gestion_risque/gestion_incident2/Controller.java. Output:
+
+2023.12.09 12:20:16 INFO  time: code lens generation in 1.07s
+2023.12.09 12:20:16 WARN  Running javac-semanticdb failed for file:///C:/Users/sguir/Desktop/PROJET%20SOFIANE/gestion_incident2/src/test/java/com/example/gestion_risque/gestion_incident2/GestionIncident2ApplicationTests.java. Output:
+
+2023.12.09 12:20:16 WARN  Running javac-semanticdb failed for file:///C:/Users/sguir/Desktop/PROJET%20SOFIANE/gestion_incident2/src/main/java/com/example/gestion_risque/gestion_incident2/GestionIncident2Application.java. Output:
+
+2023.12.09 12:20:16 WARN  Running javac-semanticdb failed for file:///C:/Users/sguir/Desktop/PROJET%20SOFIANE/gestion_incident2/src/main/java/com/example/gestion_risque/gestion_incident2/security/Security.java. Output:
+
+2023.12.09 12:20:17 WARN  Running javac-semanticdb failed for file:///C:/Users/sguir/Desktop/PROJET%20SOFIANE/gestion_incident2/src/main/java/com/example/gestion_risque/gestion_incident2/controller/admin/AdminController.java. Output:
+
+2023.12.09 12:20:56 INFO  no build target found for C:\Users\sguir\Desktop\PROJET SOFIANE\gestion_incident2\src\main\java\com\example\gestion_risque\gestion_incident2\Controller.java. Using presentation compiler with project's scala-library version: 3.3.1
+déc. 09, 2023 12:20:58 PM scala.meta.internal.pc.CompilerAccess handleError
+SEVERE: A severe compiler error occurred, full details of the error can be found in the error report C:\Users\sguir\Desktop\PROJET SOFIANE\gestion_incident2\.metals\.reports\metals-full\2023-12-09\r_compiler-error_12-20-58-173.md
+déc. 09, 2023 12:46:38 PM scala.meta.internal.pc.CompilerAccess handleError
+SEVERE: A severe compiler error occurred, full details of the error can be found in the error report C:\Users\sguir\Desktop\PROJET SOFIANE\gestion_incident2\.metals\.reports\metals-full\2023-12-09\r_compiler-error_12-46-38-517.md
+2023.12.09 12:46:54 WARN  no build target for: C:\Users\sguir\Desktop\PROJET SOFIANE\gestion_incident2\src\main\java\com\example\gestion_risque\gestion_incident2\Controller.java
+déc. 09, 2023 12:46:55 PM scala.meta.internal.pc.CompilerAccess handleError
+SEVERE: A severe compiler error occurred, full details of the error can be found in the error report C:\Users\sguir\Desktop\PROJET SOFIANE\gestion_incident2\.metals\.reports\metals-full\2023-12-09\r_compiler-error_12-46-55-316.md
+2023.12.09 12:46:55 INFO  Shutting down server
+2023.12.09 12:46:55 INFO  shutting down Metals
+2023.12.09 12:46:55 ERROR Unexpected error initializing server: 
+org.eclipse.lsp4j.jsonrpc.ResponseErrorException: Request window/showMessageRequest failed with message: Canceled
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.handleResponse(RemoteEndpoint.java:209)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.consume(RemoteEndpoint.java:193)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.handleMessage(StreamMessageProducer.java:194)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.listen(StreamMessageProducer.java:94)
+	at org.eclipse.lsp4j.jsonrpc.json.ConcurrentMessageProcessor.run(ConcurrentMessageProcessor.java:113)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:577)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.lang.Thread.run(Thread.java:1623)
+
+2023.12.09 12:46:55 INFO  Exiting server
