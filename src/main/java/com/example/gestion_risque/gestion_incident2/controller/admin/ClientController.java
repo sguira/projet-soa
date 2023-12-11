@@ -2,26 +2,34 @@ package com.example.gestion_risque.gestion_incident2.controller.admin;
 
 import com.example.gestion_risque.gestion_incident2.entity.Error;
 import com.example.gestion_risque.gestion_incident2.entity.Loger;
+import com.example.gestion_risque.gestion_incident2.entity.StatUser;
+import com.example.gestion_risque.gestion_incident2.entity.Ticket;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import com.example.gestion_risque.gestion_incident2.Repository.TicketRepository;
 import com.example.gestion_risque.gestion_incident2.Repository.UserRepository;
 import com.example.gestion_risque.gestion_incident2.email.EmailBody;
 import com.example.gestion_risque.gestion_incident2.email.EmailServiceImp;
 import com.example.gestion_risque.gestion_incident2.entity.User;
 
-@Controller
-@RequestMapping(path = "/client")
+@RestController
+@CrossOrigin("*")
 public class ClientController {
 
     @Autowired(required = true)
@@ -29,6 +37,9 @@ public class ClientController {
 
     @Autowired
     EmailServiceImp sender = new EmailServiceImp();
+
+    @Autowired(required = true)
+    private TicketRepository ticketR;
 
     // enregistrer un nouveau compte
     @PostMapping(path = "/save_user")
@@ -116,7 +127,7 @@ public class ClientController {
     /*
      * Retourne quelques informations sur un utilisateur ou un technicien
      */
-    @GetMapping(path = "info_user/{id}")
+    @GetMapping(path = "/info_user/{id}")
     ResponseEntity<User> getInfoUser(@PathVariable String id) {
         User user = userR.findById(id).get();
         User u = new User();
@@ -126,5 +137,63 @@ public class ClientController {
         u.setEmail(user.getEmail());
         u.setAdresse(user.getAdresse());
         return new ResponseEntity<User>(u, HttpStatus.OK);
+    }
+
+    @GetMapping(path = "tickets/{id}")
+    ResponseEntity<List<Ticket>> fetchTicketById(@PathVariable String id) {
+        List<Ticket> ticket = new ArrayList<Ticket>();
+        for (Ticket t : ticketR.findAll()) {
+            if (t.getUser_id() != null) {
+                if (t.getUser_id().equals(id)) {
+                    ticket.add(0, t);
+                }
+            }
+        }
+        return new ResponseEntity<List<Ticket>>(ticket, HttpStatus.OK);
+    }
+
+    /*
+     * Méthode qui retourne quelques statistiques du client
+     */
+    @GetMapping(path = "get_statistique/{id}")
+    ResponseEntity<StatUser> statistique(@PathVariable String id) {
+        List<Ticket> ticket = ticketR.findAll();
+        int total = 0;
+        int pas = 0;
+        int encours = 0;
+        int terminer = 0;
+        for (Ticket t : ticket) {
+
+            if (t.getUser_id() != null) {
+                if (t.getUser_id().equals(id)) {
+                    total += 1;
+                    if (t.getStatus().equals("Nouveau")) {
+                        pas += 1;
+
+                    }
+                    if (t.getStatus().equals("En cours")) {
+                        encours += 1;
+                    }
+                    if (t.getStatus().equals("Terminer") || t.getStatus().equals("Cloturer")) {
+                        terminer += 1;
+                    }
+                }
+            }
+        }
+        StatUser stat = new StatUser();
+
+        stat.setNombreTerminer(terminer);
+        stat.setNombreTotal(total);
+        stat.setTicketEnAttente(pas);
+        stat.setTicketEncours(encours);
+        return new ResponseEntity<StatUser>(stat, HttpStatus.OK);
+    }
+
+    /*
+     * cette méthode rétourne un seul ticket à partir de l'id du ticket
+     */
+    @GetMapping(path = "single_ticket/{id}")
+    ResponseEntity<Optional<Ticket>> getTicketById(@PathVariable String id) {
+        return new ResponseEntity<Optional<Ticket>>(ticketR.findById(id), HttpStatus.OK);
     }
 }
